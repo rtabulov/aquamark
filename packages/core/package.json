@@ -1,0 +1,28 @@
+{
+  "name": "@aquamark/core",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "scripts": {
+    "start": "node dist/main.js",
+    "dev": "nodemon --exec \"ts-node src/main.ts\" --watch src -e ts,js",
+    "build": "tsc --declaration --removeComments --sourceMap",
+    "watch": "tsc --declaration --removeComments --sourceMap --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.182",
+    "@types/node": "^16.0.0",
+    "@types/sharp": "^0.30.2",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "sharp": "^0.30.4"
+  }
+}
