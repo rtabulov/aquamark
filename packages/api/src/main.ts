@@ -16,4 +16,6 @@ app.use(bodyParser());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen(APP_PORT, () => console.log('started on port', APP_PORT));
+app.listen(APP_PORT, () =>
+  console.log(`started on http://localhost:${APP_PORT}`),
+);
