@@ -13,9 +13,19 @@ import {
   ValidationError,
 } from 'class-validator';
 import { plainToInstance, Type } from 'class-transformer';
+import path from 'path';
 
 const router = new Router();
-const upload = multer(); // note you can pass `multer` options here
+const upload = multer({
+  fileFilter: function (_req, file, cb) {
+    const allow = checkFileType(file);
+    if (allow) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  },
+}); // note you can pass `multer` options here
 
 export class AquamarkBody {
   @Type(() => String)
@@ -79,7 +89,8 @@ router.post(
       )
     ) {
       return ctx.badRequest({
-        error: 'please provide `background` and `overlay` fields',
+        error:
+          '`background` and `overlay` files must be in jpeg|jpg|png|svg format',
       });
     }
 
@@ -95,8 +106,6 @@ router.post(
 
     const background = ctx.request.files.background[0];
     const overlay = ctx.request.files.overlay[0];
-
-    console.log(body.gradient);
 
     const res = await aquamark(
       background.buffer,
@@ -150,4 +159,15 @@ function getErrorMessages(errors: ValidationError[]) {
         ].join(', '),
       ]),
   );
+}
+
+function checkFileType(file: multer.File) {
+  // Allowed ext
+  const filetypes = /jpeg|jpg|png|svg/;
+  // Check ext
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  return mimetype && extname;
 }
