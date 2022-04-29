@@ -2,7 +2,9 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "dev": "pnpm run dev --parallel --filter ./packages/* "
+    "dev": "pnpm --filter ./packages --parallel run dev",
+    "build": "pnpm --filter ./packages run build",
+    "start": "pnpm --filter ./packages/api run start"
   },
   "keywords": [],
   "author": "",
