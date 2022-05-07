@@ -131,7 +131,7 @@ router.post(
   },
 );
 
-router.get('/', async (ctx) => {
+router.get('/hello', async (ctx) => {
   ctx.body = 'hello world';
 });
 
