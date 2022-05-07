@@ -34,6 +34,6 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             cd ~/aquamark
-            pnpm install --unsafe-perm --frozen-lock
+            pnpm install --frozen-lock
             pnpm build
-            pm2 restart aquamark
+            pm2 restart am
